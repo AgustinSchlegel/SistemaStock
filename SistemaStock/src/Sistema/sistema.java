@@ -1,5 +1,7 @@
 package Sistema;
 
+import auxiliares.tupla;
+
 import java.util.HashMap;
 
 public class sistema {
@@ -12,15 +14,35 @@ public class sistema {
         this.productos = new HashMap<>();
     }
 
-    public void nuevoProducto(String nombre, double precio) {}
+    public void nuevoMaterial(String nombre, double precio, int cantidad) {
+        material material = new material(nombre, precio, cantidad);
+        this.materiales.put(nombre, material);
+    }
 
-    public void nuevoMaterial() {}
+    public void nuevoProducto(String nombre, tupla<material, Integer>[] materiales) {
+        producto producto = new producto(nombre, materiales);
+        this.productos.put(nombre, producto);
+    }
+
     public void actualizarProducto() {}
-    public void actualizarMaterial() {}
+
+    public <T extends Number> void actualizarMaterial(T datoAActualizar, String nombre, boolean dato) {
+        if (dato) {
+            materiales.get(nombre).actualizarCant((Integer)datoAActualizar);
+        }else {
+            materiales.get(nombre).actualizarPrecio((Double) datoAActualizar);
+        }
+    }
+
     public void calcularPrecioProducto() {}
+
     public void calcularPrecioMaterial() {}
+
     public void MostrarMateriales() {}
+
     public void MostrarProductos() {}
+
     public void MostrarTodo() {}
+
 }
 
