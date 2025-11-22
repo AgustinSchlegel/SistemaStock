@@ -11,6 +11,7 @@ public class producto {
     public producto(String nombre, tupla <material, Integer>[] materiales) {
         this.nombre = nombre;
         this.materiales =  materiales;
+        calcularPrecio();
     }
 
     public int produccionPosible(){
@@ -20,9 +21,11 @@ public class producto {
 
         int produccionPosible = Integer.MAX_VALUE;
 
+
         for (tupla<material, Integer> tupla : this.materiales) {
             if (tupla != null && tupla.getItem1() != null && tupla.getItem2() >0) {
                 material material =tupla.getItem1();
+
                 int cantidad = tupla.getItem2();
                 int cantidadPosible = material.getCantidad()/cantidad;
                 if (produccionPosible>cantidadPosible){
@@ -42,10 +45,10 @@ public class producto {
         double precio = 0;
 
         for (tupla<material, Integer> tupla : this.materiales) {
-            if (tupla!=null || tupla.getItem1()==null){
-                material material =tupla.getItem1();
+            if (tupla!=null || tupla.getItem1()==null) {
+                material material = tupla.getItem1();
                 int cantidad = tupla.getItem2();
-                precio += cantidad*material.getPrecioUnidad();
+                precio += cantidad * material.getPrecioUnidad();
             }
         }
 
@@ -60,5 +63,33 @@ public class producto {
         return "";
     }
 
+    public void actualizarMateriales(tupla <material, Integer>[] materiales) {
+        this.materiales = materiales;
+    }
+
+    public void actualizarNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public boolean producir(int produccion){
+        if (produccionPosible()>produccion){
+            for (tupla<material, Integer> tupla : materiales) {
+                int cantidadActual = tupla.getItem1().getCantidad();
+                int cantidadAProducir= tupla.getItem2()*produccion;
+                tupla.getItem1().actualizarCant(cantidadActual-cantidadAProducir);
+            }
+            this.disponible = produccion;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean venderProducto(int venta) {
+        if (disponible>venta){
+            this.disponible=-venta;
+            return true;
+        }
+        return false;
+    }
 
 }

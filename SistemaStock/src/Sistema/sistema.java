@@ -24,25 +24,55 @@ public class sistema {
         this.productos.put(nombre, producto);
     }
 
-    public void actualizarProducto() {}
+    public <T> void actualizarProducto(String producto, T valorActualizar, boolean dato) {
+        if (this.productos.containsKey(producto)) {
+            if (dato) {
+                productos.get(producto).actualizarNombre((String) valorActualizar);
+            }else {
+                productos.get(producto).actualizarMateriales((tupla<material, Integer>[]) valorActualizar);
+            }
+        }
+
+    }
 
     public <T extends Number> void actualizarMaterial(T datoAActualizar, String nombre, boolean dato) {
-        if (dato) {
-            materiales.get(nombre).actualizarCant((Integer)datoAActualizar);
-        }else {
-            materiales.get(nombre).actualizarPrecio((Double) datoAActualizar);
+        if (this.materiales.containsKey(nombre)) {
+            if (dato) {
+                materiales.get(nombre).actualizarCant((Integer)datoAActualizar);
+            }else {
+                materiales.get(nombre).actualizarPrecio((Double) datoAActualizar);
+            }
         }
     }
 
-    public void calcularPrecioProducto() {}
+    public double calcularPrecioProducto(String nombreProducto) {
+        if (this.productos.containsKey(nombreProducto)) {
+            productos.get(nombreProducto).calcularPrecio();
+            return productos.get(nombreProducto).getPrecio();
+        }
+        return -1;
+    }
 
-    public void calcularPrecioMaterial() {}
+    public double calcularPrecioMaterial(String nombreMaterial) {
+        if (this.materiales.containsKey(nombreMaterial)) {
+            return materiales.get(nombreMaterial).getPrecioUnidad();
+        }
+        return -1;
+    }
+/// ///////////////////////////////////////////
+/// A TERMINAR DE DESARROLLAR @TODO
+/// ///////////////////////////////////////////
+    public HashMap MostrarMateriales() {
+        return  this.materiales;
+    }
 
-    public void MostrarMateriales() {}
+    public HashMap MostrarProductos() {
+        return  this.productos;
+    }
 
-    public void MostrarProductos() {}
-
-    public void MostrarTodo() {}
+    public HashMap MostrarTodo() {
+        return MostrarMateriales() + MostrarProductos();
+    }
 
 }
 

@@ -13,7 +13,7 @@ class productoTest {
     void posibleProduccion() {
         tupla[] listaMateriales = getListaMateriales();
         producto libreta = new producto("libreta", listaMateriales);
-        assertEquals(25, libreta.produccionPosible());
+        assertEquals(16, libreta.produccionPosible());
     }
 
     @Test
@@ -21,7 +21,7 @@ class productoTest {
         tupla[] listaMateriales = getListaMateriales();
         producto libreta = new producto("libreta", listaMateriales);
         libreta.calcularPrecio();
-        assertEquals(95, libreta.getPrecio() );
+        assertEquals(396, libreta.getPrecio() );
     }
 
     private tupla[] getListaMateriales() {
@@ -30,8 +30,8 @@ class productoTest {
         tupla materiales3 = new tupla(tapas(), 2);
         tupla [] listaMateriales = new tupla[3];
         listaMateriales[0] = materiales;
-        listaMateriales[1] = materiales;
-        listaMateriales[2] = materiales;
+        listaMateriales[1] = materiales2;
+        listaMateriales[2] = materiales3;
         return listaMateriales;
     }
 
