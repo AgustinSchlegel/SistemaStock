@@ -2,7 +2,9 @@ package Sistema;
 
 import auxiliares.tupla;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class sistema {
 
@@ -19,7 +21,7 @@ public class sistema {
         this.materiales.put(nombre, material);
     }
 
-    public void nuevoProducto(String nombre, tupla<material, Integer>[] materiales) {
+    public void nuevoProducto(String nombre, List<tupla<material, Integer>> materiales) {
         producto producto = new producto(nombre, materiales);
         this.productos.put(nombre, producto);
     }
@@ -29,7 +31,7 @@ public class sistema {
             if (dato) {
                 productos.get(producto).actualizarNombre((String) valorActualizar);
             }else {
-                productos.get(producto).actualizarMateriales((tupla<material, Integer>[]) valorActualizar);
+                productos.get(producto).actualizarMateriales((List<tupla<material, Integer>>) valorActualizar);
             }
         }
 
@@ -62,17 +64,30 @@ public class sistema {
 /// ///////////////////////////////////////////
 /// A TERMINAR DE DESARROLLAR @TODO
 /// ///////////////////////////////////////////
-    public HashMap MostrarMateriales() {
-        return  this.materiales;
+
+    public producto simularProducto(String nombre, List<tupla<material, Integer>> materiales) {
+        producto producto = new producto(nombre, materiales);
+        producto.produccionPosible();
+        producto.getPrecio();
+        return producto;
     }
 
-    public HashMap MostrarProductos() {
-        return  this.productos;
+    public ArrayList<String> MostrarMateriales() {
+        ArrayList<String> materiales = new ArrayList<>();
+        for (material material : this.materiales.values()) {
+            materiales.add(material.toString());
+        }
+        return  materiales;
     }
 
-    public HashMap MostrarTodo() {
-        return MostrarMateriales() + MostrarProductos();
+    public ArrayList<String> MostrarProductos() {
+        ArrayList<String> productos = new ArrayList<>();
+        for (producto producto : this.productos.values()) {
+            productos.add(producto.toString());
+        }
+    return  productos;
     }
+
 
 }
 

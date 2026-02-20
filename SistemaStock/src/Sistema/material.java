@@ -34,8 +34,4 @@ public class material {
         return cantidad;
     }
 
-    public String ToString() {
-        return this.nombre;
-    }
-
 }
