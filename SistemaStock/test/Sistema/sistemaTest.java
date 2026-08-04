@@ -1,6 +1,0 @@
-package Sistema;
-
-
-class sistemaTest {
-
-}

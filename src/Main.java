@@ -1,8 +1,9 @@
-package Sistema;
-
 import InterfazGrafica.ventanaPrincipal;
 
-public class main {
+import javax.swing.*;
+
+public class Main {
+
     public static void main(String[] args) {
         ventanaPrincipal menu = new ventanaPrincipal();
         menu.setVisible(true);
